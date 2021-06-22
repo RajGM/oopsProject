@@ -4,6 +4,8 @@
 #include "OrderBookEntry.h"
 #include "CSVReader.h"
 
+#include <typeinfo>
+
 MerkelMain::MerkelMain()
 {
 
@@ -39,6 +41,8 @@ void MerkelMain::printMenu()
     std::cout << "5: Print wallet " << std::endl;
     // 6 continue   
     std::cout << "6: Continue " << std::endl;
+    //
+    std::cout << "7: Print live order book " << std::endl;
 
     std::cout << "============== " << std::endl;
 
@@ -182,12 +186,32 @@ void MerkelMain::gotoNextTimeframe()
 
     currentTime = orderBook.getNextTime(currentTime);
 }
+
+void MerkelMain::printLiveOrderBook(){
+
+    auto g1=orderBook.getLiveOrder();
+    // std::cout<<"VECTOR TYPE"<<std::endl;
+    // std::cout<<typeid(g1).name()<<std::endl;
+        
+    std::cout<<"Live orderBook test"<<std::endl;
+    for(auto i : g1){
+        //std::cout<<typeid(i).name()<<std::endl;
+        std::cout<<"UserName:"<<i.username<<std::endl;
+        std::cout<<"Price:"<<i.price<<std::endl;
+        std::cout<<"Amount:"<<i.amount<<std::endl;
+        std::cout<<"TimeStamp:"<<i.timestamp<<std::endl;
+        std::cout<<"Product:"<<i.product<<std::endl;
+        //break;
+        
+    }
+
+}
  
 int MerkelMain::getUserOption()
 {
     int userOption = 0;
     std::string line;
-    std::cout << "Type in 1-6" << std::endl;
+    std::cout << "Type in 1-7" << std::endl;
     std::getline(std::cin, line);
     try{
         userOption = std::stoi(line);
@@ -201,32 +225,30 @@ int MerkelMain::getUserOption()
 
 void MerkelMain::processUserOption(int userOption)
 {
-    if (userOption == 0) // bad input
+    if ( userOption <= 0 || userOption>= 8 ) // bad input
     {
-        std::cout << "Invalid choice. Choose 1-6" << std::endl;
-    }
-    if (userOption == 1) 
+        std::cout << "Invalid choice. Choose 1-7" << std::endl;
+    }else if (userOption == 1) 
     {
         printHelp();
-    }
-    if (userOption == 2) 
+    }else if (userOption == 2) 
     {
         printMarketStats();
-    }
-    if (userOption == 3) 
+    }else if (userOption == 3) 
     {
         enterAsk();
-    }
-    if (userOption == 4) 
+    }else if (userOption == 4) 
     {
         enterBid();
-    }
-    if (userOption == 5) 
+    }else if (userOption == 5) 
     {
         printWallet();
-    }
-    if (userOption == 6) 
+    }else if (userOption == 6) 
     {
         gotoNextTimeframe();
-    }       
+    }else if (userOption == 7) 
+    {
+        printLiveOrderBook();
+    }
+    
 }

@@ -20,10 +20,12 @@ class MerkelMain
         void enterBid();
         void printWallet();
         void gotoNextTimeframe();
+        void printLiveOrderBook();
         int getUserOption();
         void processUserOption(int userOption);
 
         std::string currentTime;
+        
 
 //        OrderBook orderBook{"20200317.csv"};
 	OrderBook orderBook{"20200601.csv"};

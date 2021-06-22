@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <iostream>
 
-
 /** construct, reading a csv data file */
 OrderBook::OrderBook(std::string filename)
 {
@@ -75,6 +74,15 @@ std::string OrderBook::getEarliestTime()
 {
     return orders[0].timestamp;
 }
+
+std::vector<OrderBookEntry> OrderBook::getLiveOrder(){
+    std::vector<OrderBookEntry> currentTimeLiveOrders;
+    for(int i=0;i<orders.size();i++){
+        //timestamp passed is equal then push
+        //if()
+    }
+    return orders;
+} 
 
 std::string OrderBook::getNextTime(std::string timestamp)
 {
