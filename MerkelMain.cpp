@@ -56,6 +56,8 @@ void MerkelMain::printHelp()
 
 void MerkelMain::printMarketStats()
 {
+    //enum class OrderBookType{bid, ask, unknown, asksale, bidsale};
+
     for (std::string const& p : orderBook.getKnownProducts())
     {
         std::cout << "Product: " << p << std::endl;
@@ -65,9 +67,17 @@ void MerkelMain::printMarketStats()
         std::cout << "Max ask: " << OrderBook::getHighPrice(entries) << std::endl;
         std::cout << "Min ask: " << OrderBook::getLowPrice(entries) << std::endl;
 
+        std::cout << "Product: " << p << std::endl;
+        entries = orderBook.getOrders(OrderBookType::bid, 
+                                                                p, currentTime);
+        std::cout << "Bids seen: " << entries.size() << std::endl;
+        std::cout << "Max Bid: " << OrderBook::getHighPrice(entries) << std::endl;
+        std::cout << "Min Bid: " << OrderBook::getLowPrice(entries) << std::endl;
+
 
 
     }
+
     // std::cout << "OrderBook contains :  " << orders.size() << " entries" << std::endl;
     // unsigned int bids = 0;
     // unsigned int asks = 0;
@@ -189,20 +199,16 @@ void MerkelMain::gotoNextTimeframe()
 
 void MerkelMain::printLiveOrderBook(){
 
-    auto g1=orderBook.getLiveOrder();
+    auto g1=orderBook.getLiveOrder(currentTime);
     // std::cout<<"VECTOR TYPE"<<std::endl;
-    // std::cout<<typeid(g1).name()<<std::endl;
-        
-    std::cout<<"Live orderBook test"<<std::endl;
+    // std::cout<<typeid(g1).name()<<std::endl;      
+    
     for(auto i : g1){
-        //std::cout<<typeid(i).name()<<std::endl;
         std::cout<<"UserName:"<<i.username<<std::endl;
         std::cout<<"Price:"<<i.price<<std::endl;
         std::cout<<"Amount:"<<i.amount<<std::endl;
         std::cout<<"TimeStamp:"<<i.timestamp<<std::endl;
         std::cout<<"Product:"<<i.product<<std::endl;
-        //break;
-        
     }
 
 }

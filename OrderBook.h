@@ -31,7 +31,7 @@ class OrderBook
         static double getHighPrice(std::vector<OrderBookEntry>& orders);
         static double getLowPrice(std::vector<OrderBookEntry>& orders);
 
-        std::vector<OrderBookEntry> getLiveOrder();
+        std::vector<OrderBookEntry> getLiveOrder(std::string currentTime);
 
     private:
         std::vector<OrderBookEntry> orders;

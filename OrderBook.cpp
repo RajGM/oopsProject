@@ -75,7 +75,8 @@ std::string OrderBook::getEarliestTime()
     return orders[0].timestamp;
 }
 
-std::vector<OrderBookEntry> OrderBook::getLiveOrder(){
+std::vector<OrderBookEntry> OrderBook::getLiveOrder(std::string currentTime){
+    
     std::vector<OrderBookEntry> currentTimeLiveOrders;
     for(int i=0;i<orders.size();i++){
         //timestamp passed is equal then push
