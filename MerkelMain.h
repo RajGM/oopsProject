@@ -4,7 +4,7 @@
 #include "OrderBookEntry.h"
 #include "OrderBook.h"
 #include "Wallet.h"
-
+#include "Bot.h"
 
 class MerkelMain
 {
@@ -16,13 +16,14 @@ class MerkelMain
         void printMenu();
         void printHelp();
         void printMarketStats();
-        void enterAsk();
-        void enterBid();
+        void enterAsk( std::string inputUser );
+        void enterBid( std::string inputUser );
         void printWallet();
         void gotoNextTimeframe();
-        void printLiveOrderBook();
         int getUserOption();
         void processUserOption(int userOption);
+
+        void startBot();
 
         std::string currentTime;
         

@@ -4,24 +4,18 @@
 #include "OrderBookEntry.h"
 #include "OrderBook.h"
 #include "Wallet.h"
-
+#include <map>
 
 class Bot
 {
     public:
         Bot();
         /** Call this to start the bot */
+        int elaspedPeriod = 0;
         void botInit();
+        void trainBot(std::string pair, double buyPrice,double sellPrice);
+        
     private: 
-        void getMarketStats();
-        void doAsk();
-        void doBid();
-        void printWallet();
-        void trainBot();
-        std::string getCurrentTime();
-        
-        std::string currentTime;
-        
-        Wallet wallet;
+        std::map<std::string,int> movingAverageMap;
 
 };
